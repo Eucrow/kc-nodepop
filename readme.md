@@ -2,4 +2,4 @@
 Exercise to Keepcoding Web Developer Bootcamp in node.
 
 ## Install example DB
-npm start
+npm run installDB 
