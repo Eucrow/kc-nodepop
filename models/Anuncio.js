@@ -14,25 +14,16 @@ var anuncioSchema = mongoose.Schema({
     tags: [String]
 });
 
-anuncioSchema.static.list = function (){
-    const query = anuncio.find();
-    query.exec();
+// ponemos un método al schema
+anuncioSchema.statics.list = function(callback){
+    const query = Anuncio.find();
+    query.exec(callback);
 }
 
 
 // Convert the schema to a model:
-var Anuncio = mongoose.model('Anuncio', anuncioSchema);
+const Anuncio = mongoose.model('Anuncio', anuncioSchema);
 
-
-var anuncio = new Anuncio(
-    {
-        "nombre": "Bicicleta",
-        "venta": true,
-        "precio": 230.15,
-        "foto": "bici.jpg",
-        "tags": [ "lifestyle", "motor"]
-    }
-);
 
 // anuncio.save(function (err, anuncio) {
 //      if (err) return console.error(err);
@@ -41,4 +32,4 @@ var anuncio = new Anuncio(
 
 
 // no hace falta exportalo porque mongoose me lo guarda internamente
-//module.exports = Agente;
+// module.exports = Anuncio;
