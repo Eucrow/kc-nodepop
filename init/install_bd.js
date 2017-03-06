@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const conn = require('../lib/connectMongoose');
 
 function loadInitialData (filename, callBack) {
 
@@ -32,34 +33,10 @@ function loadInitialData (filename, callBack) {
     })
 }
 
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost:27017/nodepop');
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//     //db.collection('anuncios').drop();
-//     // db.collection('usuarios').drop();
-//
-//
-//     // db.collections['anuncios'].drop( function(err) {
-//     //     console.log('collection dropped');
-//     // });
-// });
+conn.once('open', function() {
 
-
-
-const MongoClient = require('mongodb').MongoClient;
-
-MongoClient.connect('mongodb://localhost:27017/nodepop', function (err, db){
-
-    if (err) {
-        console.log(err);
-        process.exit();
-        return;
-    }
-
-    db.collection('anuncios').drop();
-    db.collection('usuarios').drop();
+    conn.collection('anuncios').drop();
+    conn.collection('usuarios').drop();
 
 
     loadInitialData('Anuncios.json', function(err, docs){
@@ -69,14 +46,46 @@ MongoClient.connect('mongodb://localhost:27017/nodepop', function (err, db){
             return;
         }
 
-        db.collection('anuncios').insert(docs.anuncios);
-        db.collection('usuarios').insert(docs.usuarios);
+        conn.collection('anuncios').insert(docs.anuncios);
+        conn.collection('usuarios').insert(docs.usuarios);
 
-        db.close();
+        conn.close();
 
     })
 
 })
+
+/*Antiguo, funciona pero no usa mongoose*/
+
+// const MongoClient = require('mongodb').MongoClient;
+//
+// MongoClient.connect('mongodb://localhost:27017/nodepop', function (err, db){
+//
+//     if (err) {
+//         console.log(err);
+//         process.exit();
+//         return;
+//     }
+//
+//     db.collection('anuncios').drop();
+//     db.collection('usuarios').drop();
+//
+//
+//     loadInitialData('Anuncios.json', function(err, docs){
+//
+//         if (err){
+//             console.log('Hubo un error: ', err);
+//             return;
+//         }
+//
+//         db.collection('anuncios').insert(docs.anuncios);
+//         db.collection('usuarios').insert(docs.usuarios);
+//
+//         db.close();
+//
+//     })
+//
+// })
 
 
 
