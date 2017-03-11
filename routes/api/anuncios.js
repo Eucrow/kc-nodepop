@@ -50,8 +50,6 @@ console.log(req.query);
         filter.tags = tags;
     }
 
-
-
     // Anuncio.list(filter, limit, skip, fields, sort, function(err, docs){
     Anuncio.list(filter, function(err, docs){
 
@@ -61,8 +59,13 @@ console.log(req.query);
             next(err); // le decimos que devuelva el next de error que está en app.js
             return;
         }
-        res.json({success: true, data: docs}); // los nombres, los que el autor decida
+        res.json({success: true, data: docs});
     });
+});
+
+// ruta para listar tags:
+router.get('/tags', function (req, res) {
+    res.json({ ok: true, allowedTags: Anuncio.allowedTags() });
 });
 
 module.exports = router;

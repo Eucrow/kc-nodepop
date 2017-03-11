@@ -14,24 +14,20 @@ var anuncioSchema = mongoose.Schema({
     tags: [String]
 });
 
-// ponemos un método al schema
-
-
+// ponemos unos métodos al schema...
+// ... listar anuncios
 anuncioSchema.statics.list = function(filter,callback){
     const query = Anuncio.find(filter);
     query.exec(callback);
 }
 
+// ... listar tags permitidos
+anuncioSchema.statics.allowedTags = function () {
+    return ['work', 'lifestyle', 'motor', 'mobile'];
+};
 
 // Convert the schema to a model:
 const Anuncio = mongoose.model('Anuncio', anuncioSchema);
 
 
-// anuncio.save(function (err, anuncio) {
-//      if (err) return console.error(err);
-//      console.log(anuncio);
-// });
 
-
-// no hace falta exportalo porque mongoose me lo guarda internamente
-// module.exports = Anuncio;
