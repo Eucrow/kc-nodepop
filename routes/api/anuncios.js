@@ -12,29 +12,51 @@ const Anuncio = mongoose.model('Anuncio'); // como mongoose ya tiene definido el
 
 router.get('/', function(req, res, next){
 
-    // const name = req.query.name;
-    // const age = req.query.age;
-    // const limit = parseInt(req.query.limit);
-    // const skip = parseInt(req.query.skip);
-    // const fields = req.query.fields;
-    // const sort = req.query.sort;
-
     const nombre = req.query.nombre;
-        // const venta = req.query.venta;
-        // const precio = req.query.precio;
-        // const foto = req.query.foto;
-        // const tags = req.query.tags;
+    const venta = req.query.venta;
+    const precio_min = req.query.precio_min;
+    const precio_max = req.query.precio_max;
+    const tags = req.query.tags;
 
+console.log(req.query);
 
     // creo un filtro vacío
     const filter = {};
 
     if (nombre) {
-        filter.nombre = nombre;
+        //filter.nombre = nombre;
+        filter.nombre = new RegExp(nombre);
     }
 
+    if (venta) {
+        filter.venta = venta;
+    }
+
+    if (precio_min && precio_max) {
+        filter.precio = {}
+        if (precio_min <= precio_max) {
+            filter.precio.$gt = precio_min;
+            filter.precio.$lt = precio_max;
+        }
+    } else if (precio_min) {
+        filter.precio = {}
+        filter.precio.$gt = precio_min;
+    } else if (precio_max) {
+        filter.precio = {}
+        filter.precio.$lt = precio_max;
+    }
+
+    if (tags) {
+        filter.tags = tags;
+    }
+
+
+
     // Anuncio.list(filter, limit, skip, fields, sort, function(err, docs){
-    Anuncio.list(function(err, docs){
+    Anuncio.list(filter, function(err, docs){
+
+        console.log(filter);
+
         if (err){
             next(err); // le decimos que devuelva el next de error que está en app.js
             return;

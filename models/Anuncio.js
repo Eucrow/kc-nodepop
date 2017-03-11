@@ -15,8 +15,10 @@ var anuncioSchema = mongoose.Schema({
 });
 
 // ponemos un método al schema
-anuncioSchema.statics.list = function(callback){
-    const query = Anuncio.find();
+
+
+anuncioSchema.statics.list = function(filter,callback){
+    const query = Anuncio.find(filter);
     query.exec(callback);
 }
 
