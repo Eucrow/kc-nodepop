@@ -11,3 +11,6 @@ var usuarioSchema = mongoose.Schema({
     email: String,
     clave: String
 });
+
+// Convert the schema to a model:
+const Usuario = mongoose.model('Usuario', usuarioSchema);
