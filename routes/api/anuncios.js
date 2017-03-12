@@ -18,6 +18,9 @@ router.get('/', function(req, res, next){
     const precio_max = req.query.precio_max;
     const tags = req.query.tags;
 
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+
 console.log(req.query);
 
     // creo un filtro vacío
@@ -51,7 +54,7 @@ console.log(req.query);
     }
 
     // Anuncio.list(filter, limit, skip, fields, sort, function(err, docs){
-    Anuncio.list(filter, function(err, docs){
+    Anuncio.list(filter, limit, skip, function(err, docs){
 
         console.log(filter);
 
