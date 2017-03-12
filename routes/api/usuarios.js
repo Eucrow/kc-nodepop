@@ -11,15 +11,13 @@ const Usuario = mongoose.model('Usuario'); // como mongoose ya tiene definido el
 
 router.post('/register', function (req, res, next) {
 
-    const usuario = new Usuario(req.body);
-
-    usuario.save(function(err, usuarioCreado){
+   Usuario.createUser(req.body, function(err){
         if (err) {
             next(err); // le decimos que devuelva el next de error que está en app.js
             return;
         }
 
-        res.json({success: true, data: usuarioCreado});
+        res.json({success: true});
     });
 
 
