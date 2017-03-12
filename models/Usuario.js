@@ -16,15 +16,15 @@ var usuarioSchema = mongoose.Schema({
 
 
 usuarioSchema.statics.createUser = function (nuevoUsuario, cb) {
-console.log(nuevoUsuario);
-    // comprobar que el usuario no exista ya
+
+    // comprobar que el usuario no exista
     Usuario.findOne({ email: nuevoUsuario.email }, function (err, user) {
         if (err) {
             return cb(err);
         }
 
         if (user) {
-            return cb({ code: 409, message: 'autor duplicado' });
+            return cb({ code: 409, message: 'usuario duplicado' });
         } else {
             // hash de la clave
             var claveHash = hash.sha256().update(nuevoUsuario.clave).digest('hex');
