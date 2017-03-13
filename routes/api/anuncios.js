@@ -9,6 +9,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Anuncio = mongoose.model('Anuncio'); // como mongoose ya tiene definido el modelo, se lo pedimos
 
+const jwtAuth = require('../../lib/jwtAuth');
+router.use(jwtAuth());
+
+
 
 router.get('/', function(req, res, next){
 
@@ -53,7 +57,6 @@ console.log(req.query);
         filter.tags = tags;
     }
 
-    // Anuncio.list(filter, limit, skip, fields, sort, function(err, docs){
     Anuncio.list(filter, limit, skip, function(err, docs){
 
         console.log(filter);

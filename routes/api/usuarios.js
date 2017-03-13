@@ -17,6 +17,8 @@ const jwtAuth = require('../../lib/jwtAuth');
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuario'); // como mongoose ya tiene definido el modelo, se lo pedimos
 
+
+//registrarse
 router.post('/register', function (req, res, next) {
 
    Usuario.createUser(req.body, function(err){
@@ -31,6 +33,7 @@ router.post('/register', function (req, res, next) {
 
 })
 
+//autenticarse: obtenemos un token
 router.post('/authenticate', function (req, res, next){
     const clave = req.body.clave;
     const email = req.body.email;
