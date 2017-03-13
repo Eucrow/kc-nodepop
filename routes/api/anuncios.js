@@ -12,8 +12,6 @@ const Anuncio = mongoose.model('Anuncio'); // como mongoose ya tiene definido el
 const jwtAuth = require('../../lib/jwtAuth');
 router.use(jwtAuth());
 
-
-
 router.get('/', function(req, res, next){
 
     const nombre = req.query.nombre;
@@ -24,8 +22,6 @@ router.get('/', function(req, res, next){
 
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
-
-console.log(req.query);
 
     // creo un filtro vacío
     const filter = {};
@@ -40,16 +36,16 @@ console.log(req.query);
     }
 
     if (precio_min && precio_max) {
-        filter.precio = {}
+        filter.precio = {};
         if (precio_min <= precio_max) {
             filter.precio.$gt = precio_min;
             filter.precio.$lt = precio_max;
         }
     } else if (precio_min) {
-        filter.precio = {}
+        filter.precio = {};
         filter.precio.$gt = precio_min;
     } else if (precio_max) {
-        filter.precio = {}
+        filter.precio = {};
         filter.precio.$lt = precio_max;
     }
 

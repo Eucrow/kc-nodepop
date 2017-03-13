@@ -5,6 +5,8 @@
 
 var mongoose = require('mongoose');
 
+var localConfig = require('../localConfig');
+
 // Create schema
 var anuncioSchema = mongoose.Schema({
     nombre: String,
@@ -20,7 +22,20 @@ anuncioSchema.statics.list = function(filter, limit, skip, callback){
     const query = Anuncio.find(filter);//Agente.find devuelve un query, una consulta (no la ejecuta). Con .exec ejecuta la consulta
     query.limit(limit);
     query.skip(skip);
-    query.exec(callback);
+
+    return query.exec(function(error, rows) {
+        if (error) {
+            return callback(error);
+        }
+
+        rows.forEach((row) => {
+            if (row.foto) {
+                row.foto = localConfig.anuncios.imagesURL + row.foto;
+            }
+        });
+
+        return callback (null, { rows: rows });
+    })
 }
 
 // ... listar tags permitidos
