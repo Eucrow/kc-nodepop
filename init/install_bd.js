@@ -10,7 +10,6 @@ const conn = require('../lib/connectMongoose');
 function loadInitialData (filename, callBack) {
 
     const file = path.join("init", filename);
-    console.log(file);
 
 
     fs.readFile(file, 'utf8', function(err, data){
@@ -53,39 +52,7 @@ conn.once('open', function() {
 
     })
 
-})
-
-/*Antiguo, funciona pero no usa mongoose*/
-
-// const MongoClient = require('mongodb').MongoClient;
-//
-// MongoClient.connect('mongodb://localhost:27017/nodepop', function (err, db){
-//
-//     if (err) {
-//         console.log(err);
-//         process.exit();
-//         return;
-//     }
-//
-//     db.collection('anuncios').drop();
-//     db.collection('usuarios').drop();
-//
-//
-//     loadInitialData('Anuncios.json', function(err, docs){
-//
-//         if (err){
-//             console.log('Hubo un error: ', err);
-//             return;
-//         }
-//
-//         db.collection('anuncios').insert(docs.anuncios);
-//         db.collection('usuarios').insert(docs.usuarios);
-//
-//         db.close();
-//
-//     })
-//
-// })
+});
 
 
 
