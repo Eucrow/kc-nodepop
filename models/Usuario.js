@@ -30,7 +30,7 @@ usuarioSchema.statics.createUser = function (nuevoUsuario, cb) {
     }
 
     if (!validator.isLength(nuevoUsuario.clave, {min:8})) {
-        return cb({ code: 409, message: __('WRONG_PASSWORD')});
+        return cb({ code: 409, message: __('PASSWORD_TOO_SMALL')});
     }
 
     // comprobar que el usuario no exista

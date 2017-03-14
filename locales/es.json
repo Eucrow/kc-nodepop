@@ -5,6 +5,6 @@
     "DUPLICATED_USER": "Lo sentimos, ese usuario ya existe",
     "WRONG_EMAIL": "El email no se parece a un email, compruébalo...",
     "WRONG_NAME": "Nombre debe tener sólo caracteres alfanuméricos",
-    "WRONG_PASSWORD": "Clave debe tener al menos 8 caracteres"
+    "PASSWORD_TOO_SMALL": "Clave debe tener al menos 8 caracteres"
 }
 
