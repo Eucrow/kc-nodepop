@@ -7,6 +7,9 @@ module.exports = {
         expiresIn: '2 days'
     },
     anuncios: {
-        imagesURL: '/images/ads/'
+        imagesURL: './images/ads/'
+    },
+    locales: {
+        localesPath: './locales/'
     }
 };

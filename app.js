@@ -9,7 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+var i18n = require("i18n");
 
 // base de datos y modelos
 require('./lib/connectMongoose');  //se ejecuta el código que hay en connectMongoose.js, que lo que hace es arrancar la
@@ -20,6 +20,14 @@ require('./models/Usuario');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// configure locales with i18n
+i18n.configure({
+    locales:['en', 'es'],
+    directory: __dirname + '/locales',
+    register: global
+});
+app.use(i18n.init);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

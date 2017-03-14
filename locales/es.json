@@ -1,0 +1,7 @@
+{
+    "USER_NOT_FOUND": "Usuario no encontrado",
+    "WRONG_PASSWORD": "Contraseña incorrecta",
+    "NO_ADS" : "Lo sentimos, no hay coincidencias :(",
+    "DUPLICATED_USER": "Lo sentimos, ese usuario ya existe"
+}
+

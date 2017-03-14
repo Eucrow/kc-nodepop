@@ -61,7 +61,15 @@ router.get('/', function(req, res, next){
             next(err); // le decimos que devuelva el next de error que está en app.js
             return;
         }
-        res.json({success: true, data: docs});
+
+        if (docs.rows.length == 0){
+            res.json({
+                success: true,
+                data: res.__('NO_ADS')
+            })
+        } else {
+            res.json({success: true, data: docs});
+        }
     });
 });
 

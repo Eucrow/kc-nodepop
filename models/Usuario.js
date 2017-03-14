@@ -24,7 +24,7 @@ usuarioSchema.statics.createUser = function (nuevoUsuario, cb) {
         }
 
         if (user) {
-            return cb({ code: 409, message: 'usuario duplicado' });
+            return cb({ code: 409, message: __('DUPLICATED_USER') });
         } else {
             // hash de la clave
             var claveHash = hash.sha256().update(nuevoUsuario.clave).digest('hex');

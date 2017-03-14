@@ -22,10 +22,18 @@ const Usuario = mongoose.model('Usuario'); // como mongoose ya tiene definido el
 router.post('/register', function (req, res, next) {
 
    Usuario.createUser(req.body, function(err){
-        if (err) {
-            next(err); // le decimos que devuelva el next de error que está en app.js
-            return;
-        }
+        // if (err) {
+        //     next(err); // le decimos que devuelva el next de error que está en app.js
+        //     return;
+        // }
+
+       if (err) {
+           res.json({
+               success: false,
+               message: err
+           })
+           return;
+       }
 
         res.json({success: true});
     });
@@ -45,25 +53,35 @@ router.post('/authenticate', function (req, res, next){
             return;
         }
 
-        //codificamos la contraseña con el hash
-        const claveCodificada = hash.sha256().update(clave).digest('hex');
-
-        //comprobamos que coincida
-        if (claveCodificada == user.clave) {
-            // hacemos un token
-            const token = jwt.sign({email: user.email}, localConfig.jwt.secret, {
-                expiresIn: localConfig.jwt.expiresIn
-            });
-
-            res.json({success: true, token: token});
-
-        } else {
+        if (!user) {
             return res.json({
-                ok: false, error: {
+                ok: false,
+                error: {
                     code: 401,
-                    message: 'password incorrecto'
+                    message: res.__('USER_NOT_FOUND')
                 }
             });
+        } else {
+            //codificamos la contraseña con el hash
+            const claveCodificada = hash.sha256().update(clave).digest('hex');
+
+            //comprobamos que coincida
+            if (claveCodificada == user.clave) {
+                // hacemos un token
+                const token = jwt.sign({email: user.email}, localConfig.jwt.secret, {
+                    expiresIn: localConfig.jwt.expiresIn
+                });
+
+                res.json({success: true, token: token});
+
+            } else {
+                return res.json({
+                    ok: false, error: {
+                        code: 401,
+                        message: res.__('WRONG_PASSWORD')
+                    }
+                });
+            }
         }
     });
 });

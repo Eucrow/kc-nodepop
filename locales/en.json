@@ -1,0 +1,7 @@
+{
+    "USER_NOT_FOUND": "User not found",
+    "WRONG_PASSWORD": "Wrong password",
+    "NO_ADS" : "Sorry, no matches :(",
+    "DUPLICATED_USER": "Sorry, this user already exists"
+}
+
