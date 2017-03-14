@@ -12,7 +12,9 @@ npm start
 
 ## API v1 info
 
-Security
+Access to api: `www.domain.com/apiv1/...`
+
+### Security
 
 The API uses JSON Web Token to handle users.
 
