@@ -55,8 +55,6 @@ router.get('/', function(req, res, next){
 
     Anuncio.list(filter, limit, skip, function(err, docs){
 
-        console.log(filter);
-
         if (err){
             next(err); // le decimos que devuelva el next de error que está en app.js
             return;

@@ -6,5 +6,7 @@
 	"WRONG_EMAIL": "Email doesn't like a email... check it",
     "WRONG_NAME": "Name must have only alphanumeric characters",
     "PASSWORD_TOO_SMALL": "Password must have 8 characters or more",
-	"USER_CREATED": "User created!"
+	"USER_CREATED": "User created!",
+	"NO_TOKEN": "No token provided",
+	"INVALID_TOKEN": "Invalid token"
 }
