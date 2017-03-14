@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 
 const hash = require('hash.js');
 
+var validator = require('validator');
+
 // Create schema
 var usuarioSchema = mongoose.Schema({
     nombre: String,
@@ -16,6 +18,20 @@ var usuarioSchema = mongoose.Schema({
 
 
 usuarioSchema.statics.createUser = function (nuevoUsuario, cb) {
+
+
+    //validar campos
+    if (!validator.isEmail(nuevoUsuario.email)) {
+        return cb({ code: 409, message: __('WRONG_EMAIL') });
+    }
+
+    if (!validator.isAlphanumeric(nuevoUsuario.nombre)) {
+        return cb({ code: 409, message: __('WRONG_NAME')});
+    }
+
+    if (!validator.isLength(nuevoUsuario.clave, {min:8})) {
+        return cb({ code: 409, message: __('WRONG_PASSWORD')});
+    }
 
     // comprobar que el usuario no exista
     Usuario.findOne({ email: nuevoUsuario.email }, function (err, user) {

@@ -1,7 +1,9 @@
 {
-    "USER_NOT_FOUND": "User not found",
-    "WRONG_PASSWORD": "Wrong password",
-    "NO_ADS" : "Sorry, no matches :(",
-    "DUPLICATED_USER": "Sorry, this user already exists"
+	"USER_NOT_FOUND": "User not found",
+	"WRONG_PASSWORD": "Wrong password",
+	"NO_ADS": "Sorry, no matches :(",
+	"DUPLICATED_USER": "Sorry, this user already exists",
+	"WRONG_EMAIL": "Email doesn't like a email... check it",
+    "WRONG_NAME": "Name must have only alphanumeric characters",
+    "WRONG_PASSWORD": "Password must have 8 characters or more"
 }
-
