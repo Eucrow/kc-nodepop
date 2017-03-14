@@ -35,7 +35,10 @@ router.post('/register', function (req, res, next) {
            return;
        }
 
-        res.json({success: true});
+       return res.json({
+           ok: true,
+           message: res.__('USER_CREATED')
+        });
     });
 
 

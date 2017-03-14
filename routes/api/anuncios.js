@@ -28,7 +28,7 @@ router.get('/', function(req, res, next){
 
     if (nombre) {
         //filter.nombre = nombre;
-        filter.nombre = new RegExp(nombre);
+        filter.nombre = new RegExp(nombre, 'i');
     }
 
     if (venta) {
