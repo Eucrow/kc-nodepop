@@ -2,13 +2,24 @@
 Exercise to Keepcoding Web Developer Bootcamp in node.
 
 ## Install dependencies
+```
 npm install
+```
 
 ## Initialize and install examples in the database
-npm run installDB 
+```
+npm run installDB
+```
 
 ## Start
+```
 npm start
+```
+
+## ESLint linting utility
+```
+npm run eslint
+```
 
 ## API v1 info
 
