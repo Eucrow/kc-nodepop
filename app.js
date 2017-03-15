@@ -22,9 +22,9 @@ app.set('view engine', 'ejs');
 
 // configure locales with i18n
 i18n.configure({
-  locales: ['en', 'es'],
-  directory: path.join(__dirname, '/locales'),
-  register: global
+    locales: ['en', 'es'],
+    directory: path.join(__dirname, '/locales'),
+    register: global
 });
 app.use(i18n.init);
 
@@ -44,20 +44,20 @@ app.use('/apiv1/anuncios/tags', require('./routes/apiv1/anuncios'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

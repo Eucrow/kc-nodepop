@@ -1,7 +1,7 @@
 /**
  * Created by MarcoAntonio on 04/02/2017.
  */
-"use strict";
+'use strict';
 
 const express = require('express');
 const router = express.Router();
@@ -12,8 +12,6 @@ const jwt = require('jsonwebtoken');
 
 const localConfig = require('../../localConfig');
 
-const jwtAuth = require('../../lib/jwtAuth');
-
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuario'); // como mongoose ya tiene definido el modelo, se lo pedimos
 
@@ -21,28 +19,28 @@ const Usuario = mongoose.model('Usuario'); // como mongoose ya tiene definido el
 //registrarse
 router.post('/register', function (req, res, next) {
 
-   Usuario.createUser(req.body, function(err){
+    Usuario.createUser(req.body, function(err){
         // if (err) {
         //     next(err); // le decimos que devuelva el next de error que está en app.js
         //     return;
         // }
 
-       if (err) {
-           res.json({
-               success: false,
-               message: err
-           })
-           return;
-       }
+        if (err) {
+            res.json({
+                success: false,
+                message: err
+            });
+            return;
+        }
 
-       return res.json({
-           ok: true,
-           message: res.__('USER_CREATED')
+        return res.json({
+            ok: true,
+            message: res.__('USER_CREATED')
         });
     });
 
 
-})
+});
 
 //autenticarse: obtenemos un token
 router.post('/authenticate', function (req, res, next){

@@ -1,7 +1,7 @@
 /**
  * Created by MarcoAntonio on 04/02/2017.
  */
-"use strict";
+'use strict';
 
 const express = require('express');
 const router = express.Router();
@@ -64,7 +64,7 @@ router.get('/', function(req, res, next){
             res.json({
                 success: true,
                 data: res.__('NO_ADS')
-            })
+            });
         } else {
             res.json({success: true, data: docs});
         }

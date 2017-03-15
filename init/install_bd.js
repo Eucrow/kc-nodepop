@@ -7,14 +7,14 @@ const path = require('path');
 
 const conn = require('../lib/connectMongoose');
 
-function loadInitialData (filename, callBack) {
+function loadInitialData(filename, callBack) {
 
-    const file = path.join("init", filename);
+    const file = path.join('init', filename);
 
 
-    fs.readFile(file, 'utf8', function(err, data){
+    fs.readFile(file, 'utf8', function (err, data) {
 
-        if (err){
+        if (err) {
             callBack(err);
             return;
         }
@@ -25,24 +25,23 @@ function loadInitialData (filename, callBack) {
         try {
             const ficheroJson = JSON.parse(data);
             callBack(null, ficheroJson);
-        } catch(ex) {
+        } catch (ex) {
             callBack(ex);
             return;
         }
-    })
+    });
 }
 
-conn.once('open', function() {
+conn.once('open', function () {
 
     conn.collection('anuncios').drop();
     conn.collection('usuarios').drop();
 
 
-    loadInitialData('Anuncios.json', function(err, docs){
+    loadInitialData('Anuncios.json', function (err, docs) {
 
-        if (err){
-            console.log('Hubo un error: ', err);
-            return;
+        if (err) {
+            return (err);
         }
 
         conn.collection('anuncios').insert(docs.anuncios);
@@ -50,7 +49,7 @@ conn.once('open', function() {
 
         conn.close();
 
-    })
+    });
 
 });
 

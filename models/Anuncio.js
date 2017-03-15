@@ -1,7 +1,7 @@
 /**
  * Created by MarcoAntonio on 30/01/2017.
  */
-"use strict";
+'use strict';
 
 var mongoose = require('mongoose');
 
@@ -35,8 +35,8 @@ anuncioSchema.statics.list = function(filter, limit, skip, callback){
         });
 
         return callback (null, { rows: rows });
-    })
-}
+    });
+};
 
 // ... listar tags permitidos
 anuncioSchema.statics.allowedTags = function () {
