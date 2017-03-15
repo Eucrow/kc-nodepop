@@ -18,37 +18,8 @@ Access to api: `www.domain.com/apiv1/...`
 
 The API uses JSON Web Token to handle users.
 
-### Register user
-First you will need to call /usuarios/register to create a user.
-
-
-### Authenticate user
-Then call /usuarios/authenticate to obtain a token.
-
-
-Next calls will need to have the token in:
-
-    Header: x-access-token: eyJ0eXAiO...
-    Body: { token: eyJ0eXAiO... }
-    Query string: ?token=eyJ0eXAiO...
-
-### Language
-
-All requests that return error messages are localized to spanish, if you want to change language make the request with the header accept-language set to other language, i.e. Accept-Language: en
-
-### Error example
-```
-{
-  "ok": false,
-  "error": {
-    "code": 401,
-    "message": "User not found"
-  }
-}
-```
-### POST /usuarios/register
-
-You must to send a POST request with input body: { nombre, email, clave}
+### POST /usuarios/register (register user)
+To create a new user you will need to send a POST request to /usuarios/register with input body: { nombre, email, clave }
 
 Result:
 ```
@@ -57,11 +28,10 @@ Result:
   "message": "User created!"
 }
 ```
-### POST /usuarios/authenticate
 
-The you must to send a POST request to authenticate and obtain a token
+### POST /usuarios/authenticate (authenticate user)
 
-Input Body: { email, clave }
+To authenticate and obtain a token you must to send a POST request to /usuarios/authenticate with input Body: { email, clave }
 
 Result:
 ```
@@ -70,7 +40,14 @@ Result:
   "token": "eyJhbG..."
 }
 ```
-### GET /anuncios
+
+Next calls will need to have the token in:
+
+    Header: x-access-token: eyJ0eXAiO...
+    Body: { token: eyJ0eXAiO... }
+    Query string: ?token=eyJ0eXAiO...
+
+### GET /anuncios (list of ads)
 
 Input Query:
 
@@ -105,7 +82,7 @@ Result:
   }
 }
 ```
-### GET /anuncios/tags
+### GET /anuncios/tags (list of tags)
 
 Return the list of available tags for the resource anuncios.
 
@@ -119,6 +96,21 @@ Result:
     "motor",
     "mobile"
   ]
+}
+```
+
+### Language
+
+All requests that return error messages are localized to spanish, if you want to change language make the request with the header accept-language set to other language, i.e. Accept-Language: en
+
+### Error example
+```
+{
+  "ok": false,
+  "error": {
+    "code": 401,
+    "message": "User not found"
+  }
 }
 ```
 
