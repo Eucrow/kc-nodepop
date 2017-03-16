@@ -4,8 +4,12 @@
 
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const conn = require('../lib/connectMongoose');
+
+require('../models/Anuncio');
+require('../models/Usuario');
 
 function loadInitialData(filename, callBack) {
 
@@ -30,12 +34,34 @@ function loadInitialData(filename, callBack) {
             return;
         }
     });
+
 }
 
 conn.once('open', function () {
 
-    conn.collection('anuncios').drop();
-    conn.collection('usuarios').drop();
+    // This doesn't work in the right way:
+    // conn.collection('anuncios').drop()
+    // conn.collection('usuarios').drop()
+
+    // removing old data in Usuarios
+    const Usuario = mongoose.model('Usuario');
+
+    Usuario.remove({}, function(err) {
+        if (err) {
+            return (err)
+        }
+        console.log('Usuarios collection removed')
+    });
+
+    // removing old data in Anuncios
+    const Anuncio = mongoose.model('Anuncio');
+
+    Anuncio.remove({}, function(err) {
+        if (err) {
+            return (err);
+        }
+        console.log('Anuncios collection removed')
+    });
 
 
     loadInitialData('Anuncios.json', function (err, docs) {
